@@ -22,4 +22,5 @@ glob
 
 shutil (pip install pytest-shutil)
 
-![The model(https://github.com/waseemabbas05/gender_classification_demo/blob/master/scripts/cnn-model.jpg)
+<img align="center" src="https://github.com/waseemabbas05/gender_classification_demo/blob/master/scripts/cnn-model.jpg">
+

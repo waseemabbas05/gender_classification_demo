@@ -22,4 +22,4 @@ glob
 
 shutil (pip install pytest-shutil)
 
-![alt text](scripts/cnn-model.png)
+![image](https://user-images.githubusercontent.com/5336269/68546976-b1450380-03dc-11ea-823d-3904793f2c26.png)

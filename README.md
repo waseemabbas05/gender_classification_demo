@@ -15,7 +15,3 @@ pandas (pip install pandas)
 numpy (pip install numpy)
 glob 
 shutil (pip install pytest-shutil)
-
-<p align="center">
-  <img src="http://visual.cs.ucl.ac.uk/pubs/monoDepth/monodepth_teaser.gif" alt="monodepth">
-</p>

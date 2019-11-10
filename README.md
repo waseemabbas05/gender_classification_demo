@@ -21,6 +21,5 @@ numpy (pip install numpy)
 glob 
 
 shutil (pip install pytest-shutil)
-
 <img align="center" src="https://github.com/waseemabbas05/gender_classification_demo/blob/master/scripts/cnn-model.png">
 

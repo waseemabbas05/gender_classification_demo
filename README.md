@@ -22,4 +22,4 @@ glob
 
 shutil (pip install pytest-shutil)
 
-![Optional Text](../master/scripts/cnn-model.jpg)
+![The model(https://github.com/waseemabbas05/gender_classification_demo/blob/master/scripts/cnn-model.jpg)

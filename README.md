@@ -41,3 +41,6 @@ The second hierarchy has two files, "read_data.py" and "model.py".
 "model.py" contains sub-routines for building the inference graphs, cost functions and supporting functions. At this point, it only accepts 2 arguments when called externally. One; a batch of images or a single image and a boolean variable which tells it if it should run in training mode or inference mode. The model is illustrated in the figure above.
 
 ### Training
+Before starting the training, the user should specify a folder for downloading the data and where the kernel can be stored (not included at this point). Since the CelebA dataset contains a lot of images, the unzipping process can take a while so be patient.
+
+Once the data is downloaded, the rest of the code can be run as it is. However, if the user wants to change model structure, they can do so by editing the "model.py" file. They can change the number of filters, change activation function, add or remove convolutional layers

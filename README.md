@@ -23,5 +23,5 @@ glob
 shutil (pip install pytest-shutil)
 
 <p align="center">
-  <img src="https://drive.google.com/open?id=1b29PCrl4dT0vupb_BiFhOksxz3-mWsQx">
+  <img src="https://github.com/waseemabbas05/gender_classification_demo/blob/master/scripts/cnn-model.jpg" alt="monodepth">
 </p>

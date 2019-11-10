@@ -23,5 +23,5 @@ glob
 shutil (pip install pytest-shutil)
 
 <p align="center">
-  <img src="http://visual.cs.ucl.ac.uk/pubs/monoDepth/monodepth_teaser.gif" alt="monodepth">
+  <img src="https://drive.google.com/open?id=1b29PCrl4dT0vupb_BiFhOksxz3-mWsQx">
 </p>

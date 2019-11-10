@@ -20,5 +20,6 @@ numpy (pip install numpy)
 
 glob 
 
-shutil (pip install pytest-shutil)>
+shutil (pip install pytest-shutil)
+
 ![alt text](scripts/cnn-model.png)

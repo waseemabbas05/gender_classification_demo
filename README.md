@@ -28,18 +28,18 @@ The classification is a standard CNN model with a few skip connections added to 
 
 The convolutional layers are followed by 4 fully connected layers and then an output layer. The FC layers have 128, 64, 32 and 16 nodes and the output layer has 2 nodes, one for each class. The FC layers have relu activation while the output layer has softmax activation. 
 
-***** Intuition 
+A block diagram of the network is shown below 
+![image](https://user-images.githubusercontent.com/5336269/68546976-b1450380-03dc-11ea-823d-3904793f2c26.png)
+
+### Reasoning
 
 * The reason I chose a CNN based model is to let the model learn the features instead of giving it hand crafted features. We cannot objectively find out exactly which features help our visual system identify a gender. We might not even know the specific feature set our vosual cortex employs for gender identification. Therefore, instead of going for a features based classifier, I went for CNN based classifier.
 
-* * The reason why I added skip connections in the convolutional layers is to add complexity to the learned feature space. My intuotion is that if we let the input image of the CNN layer to guide the learned features, it can result in better feature space. This is why I added a skip connection after the two 3 by 3 convolutions. 
+* The reason why I added skip connections in the convolutional layers is to add complexity to the learned feature space. My intuotion is that if we let the input image of the CNN layer to guide the learned features, it can result in better feature space. This is why I added a skip connection after the two 3 by 3 convolutions. 
 
-* * * I chose weighted cross entropy as the cost function because I observed that the classes are not well balanced.
+* I chose weighted cross entropy as the cost function because I observed that the classes are not well balanced.
 
-* * * * I chose 4 fully connected layer to bring down the number of features gradually instead of bringing them down from more than 300 to just 2 by a single output layer.
-
-A block diagram of the network is shown below 
-![image](https://user-images.githubusercontent.com/5336269/68546976-b1450380-03dc-11ea-823d-3904793f2c26.png)
+* I chose 4 fully connected layer to bring down the number of features gradually instead of bringing them down from more than 300 to just 2 by a single output layer.
 
 ### The code hierarchy
 This code is divided in 2 hierarchies. The top hierarchy has the code for training and inference. It includes the jupyter notebook "gender_classification_demo.ipynb" and pyhton file "gender_classification_demo.py". The notebook can be launched either on colab or any other jupyter capable platforms while the python file can be called in any python IDE or command line.

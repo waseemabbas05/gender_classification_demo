@@ -44,3 +44,8 @@ The second hierarchy has two files, "read_data.py" and "model.py".
 Before starting the training, the user should specify a folder for downloading the data and where the kernel can be stored (not included at this point). Since the CelebA dataset contains a lot of images, the unzipping process can take a while so be patient.
 
 Once the data is downloaded, the rest of the code can be run as it is. However, if the user wants to change model structure, they can do so by editing the "model.py" file. They can change the number of filters, change activation function, add or remove convolutional layers
+
+At this time, the training code loops over all the batches available in training data once. The user can change how many epochs to run and how many batches to include. They can simply increase the number of epochs to any number they want. However, the number of batches should be less than the total number of batches available. The total number of batches depend on the batch size selected by the user
+
+### Inference
+Once the model is trained, the user can simply pass an image or batch of images to the "prediction" function/graph defined in the main and it will return a class label for the image or the batch of images.

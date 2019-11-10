@@ -43,55 +43,38 @@ def crop_and_concat(x1,x2):
         return tf.concat([x1, x2], 3)
     
 def gender_classifier(x,is_training):
+    out_layer1 = custom_conv_layer(x,num_filters,is_training,1)
+    out_layer2 = custom_conv_layer(out_layer1,num_filters,is_training,3)
+    out_layer3 = custom_conv_layer(out_layer2,num_filters,is_training,3)     
+        
+    flat_x = tf.contrib.layers.flatten(en_relu3) 
+
+    fully_connected1 = tf.contrib.layers.fully_connected(inputs=flat_x, num_outputs=128, 
+                                                     activation_fn=tf.nn.relu,scope="Fully_Conn1")
+    fully_connected2 = tf.contrib.layers.fully_connected(inputs=fully_connected1, num_outputs=64, 
+                                                     activation_fn=tf.nn.relu,scope="Fully_Conn2")
+    fully_connected3 = tf.contrib.layers.fully_connected(inputs=fully_connected2, num_outputs=32, 
+                                                     activation_fn=tf.nn.relu,scope="Fully_Conn3")
+    fully_connected3 = tf.contrib.layers.fully_connected(inputs=fully_connected3, num_outputs=16, 
+                                                     activation_fn=tf.nn.relu,scope="Fully_Conn4")
+    prediction = tf.contrib.layers.fully_connected(inputs=fully_connected3, num_outputs=2, 
+                                           activation_fn=tf.nn.softmax,scope="Out")
+    return prediction
+        
+        
+    
+def custom_conv_layer(x,num_filters,is_training,layer_num):
     p_size = 2; strides = 2
-    with tf.name_scope("layer1"):
-        cnn_out1 = tf.layers.conv2d(inputs=x, filters=4, \
+    with tf.name_scope("layer"+str(layer_num)):
+        cnn_out1 = tf.layers.conv2d(inputs=x, filters=num_filters, \
                                      kernel_size=[3,3], padding='same', activation=None)
         cnn_out1 = tf.layers.conv2d(inputs=cnn_out1, filters=4, \
                                      kernel_size=[3,3], padding='same', activation=None)
         concat_x1 = crop_and_concat(cnn_out1,x)
         pool_out1 = tf.layers.average_pooling2d(inputs=concat_x1, pool_size=[p_size,p_size], strides=strides)
-        en_bnorm1 = batch_norm(pool_out1, 7, is_training)
+        en_bnorm1 = batch_norm(pool_out1, num_filters+x.shape[3], is_training)
         en_relu1 = tf.nn.leaky_relu(en_bnorm1,name=None,alpha = 0.15)
-        
-        
-    with tf.name_scope("layer2"):
-        cnn_out2 = tf.layers.conv2d(inputs=en_relu1, filters=8, \
-                                     kernel_size=[3,3], padding='same', activation=None)
-        cnn_out2 = tf.layers.conv2d(inputs=cnn_out2, filters=8, \
-                                     kernel_size=[3,3], padding='same', activation=None)
-        concat_x2 = crop_and_concat(cnn_out2,en_relu1)
-        pool_out2 = tf.layers.average_pooling2d(inputs=concat_x2, pool_size=[p_size,p_size], strides=strides)
-        en_bnorm2 = batch_norm(pool_out2, 15, is_training)
-        en_relu2 = tf.nn.leaky_relu(en_bnorm2,name=None,alpha = 0.15)
-        
-    with tf.name_scope("layer3"):
-        cnn_out3 = tf.layers.conv2d(inputs=pool_out2, filters=16, \
-                                     kernel_size=[3,3], padding='same', activation=None)
-        cnn_out3 = tf.layers.conv2d(inputs=cnn_out3, filters=16, \
-                                     kernel_size=[3,3], padding='same', activation=None)
-        concat_x3 = crop_and_concat(cnn_out3,en_relu2)
-        pool_out3 = tf.layers.average_pooling2d(inputs=concat_x3, pool_size=[p_size,p_size], strides=strides)
-        en_bnorm3 = batch_norm(pool_out3, 31, is_training)
-        en_relu3 = tf.nn.leaky_relu(en_bnorm3,name=None,alpha = 0.15)
-        
-        
-        flat_x = tf.contrib.layers.flatten(en_relu3) 
-        
-        fully_connected1 = tf.contrib.layers.fully_connected(inputs=flat_x, num_outputs=128, 
-                                                         activation_fn=tf.nn.relu,scope="Fully_Conn1")
-        fully_connected2 = tf.contrib.layers.fully_connected(inputs=fully_connected1, num_outputs=64, 
-                                                         activation_fn=tf.nn.relu,scope="Fully_Conn2")
-        fully_connected3 = tf.contrib.layers.fully_connected(inputs=fully_connected2, num_outputs=32, 
-                                                         activation_fn=tf.nn.relu,scope="Fully_Conn3")
-        fully_connected3 = tf.contrib.layers.fully_connected(inputs=fully_connected3, num_outputs=16, 
-                                                         activation_fn=tf.nn.relu,scope="Fully_Conn4")
-        prediction = tf.contrib.layers.fully_connected(inputs=fully_connected3, num_outputs=2, 
-                                               activation_fn=tf.nn.softmax,scope="Out")
-        return prediction
-        
-        
-    
+    return en_relu1
     
 def wce_loss(y,pred):
     #x_mask = tf.nn.softmax(x_mask,axis=2)
